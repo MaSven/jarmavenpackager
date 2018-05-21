@@ -2,6 +2,7 @@ package space.smarquardt.jarmavenpackager.dependencieserver;
 
 import java.io.File;
 import java.util.Optional;
+import java.util.Set;
 
 import okhttp3.Response;
 
@@ -20,25 +21,23 @@ public interface IDependencieServer {
 	 * @return {@link Response} if the server has this dependencie otherwise
 	 *         {@link Optional#empty()}
 	 */
-	Optional<Response> searchArtifactWithChecksum(File jarFile);
+	Optional<MavenArtifact> searchArtifactWithChecksum(File jarFile);
 
 	/**
-	 * Search for the mavenarchiv with groupid and artifactid. Will take the first
-	 * found option
+	 * Search for the mavenarchiv with groupid and artifactid.
 	 *
 	 * @param groupId    GroupId of the jar
 	 * @param artifactId Artifactid of the jar
-	 * @return {@link Response} if jar found otherwise {@link Optional#empty()}
+	 * @return Bucket of artifacts if jar found otherwise {@link Optional#empty()}
 	 */
-	Optional<Response> searchArtifactWithGroupIdAndArtifactId(String groupId, String artifactId);
+	Optional<Set<MavenArtifact>> searchArtifactWithGroupIdAndArtifactId(String groupId, String artifactId);
 
 	/**
-	 * Searches for the mavenarchiv only with a ClassName. Will take the first found
-	 * option
+	 * Searches for the mavenarchiv only with a ClassName.
 	 *
 	 * @param nameOfFile Name of the File to search for
-	 * @return Response or {@link Optional#empty()}
+	 * @return bucket of artifacts or {@link Optional#empty()}
 	 */
-	Optional<Response> searchForFileWithClassName(String nameOfFile);
+	Optional<Set<MavenArtifact>> searchForFileWithClassName(String nameOfFile);
 
 }
