@@ -12,7 +12,6 @@ import java.util.function.Function;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 import space.smarquardt.jarmavenpackager.dependencieserver.IDependencieFileResolver;
 import space.smarquardt.jarmavenpackager.dependencieserver.MavenArtifact;
@@ -51,9 +50,9 @@ public class DefaultDependencieServer implements IDependencieFileResolver {
 		try {
 			final Optional<String> sha1FromFile = FileUtils.getSha1FromFile(this.jarFile);
 			if (sha1FromFile.isPresent()) {
-				final Request request = new Request.Builder().url(function.apply(sha1FromFile.get())).build();
-				final Response execute = this.client.newCall(request).execute();
-				return getartifactFromResponseBody.apply(execute.body());
+				final var request = new Request.Builder().url(function.apply(sha1FromFile.get())).build();
+				final var response = this.client.newCall(request).execute();
+				return getartifactFromResponseBody.apply(response.body());
 			}
 		} catch (final NoSuchAlgorithmException | IOException e) {
 			// TODO Auto-generated catch block
