@@ -1,7 +1,7 @@
 
 /**
  * Implementations of the
- * {@link space.smarquardt.jarmavenpackager.dependencieserver.IDependencieServer}.
+ * {@link space.smarquardt.jarmavenpackager.dependencieserver.IDependencieFileResolver}.
  *
  * @author sven
  *
